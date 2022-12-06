@@ -29,6 +29,7 @@ namespace RandomSelector
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label_numberDisplay = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,21 +42,23 @@ namespace RandomSelector
             this.tool_reset = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
             // label_numberDisplay
             // 
-            this.label_numberDisplay.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label_numberDisplay.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tableLayoutPanel1.SetColumnSpan(this.label_numberDisplay, 3);
             this.label_numberDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_numberDisplay.Font = new System.Drawing.Font("微軟正黑體", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label_numberDisplay.Location = new System.Drawing.Point(3, 0);
             this.label_numberDisplay.Name = "label_numberDisplay";
-            this.label_numberDisplay.Size = new System.Drawing.Size(468, 293);
+            this.label_numberDisplay.Size = new System.Drawing.Size(495, 336);
             this.label_numberDisplay.TabIndex = 0;
             this.label_numberDisplay.Text = "0 0";
             this.label_numberDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -64,7 +67,7 @@ namespace RandomSelector
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微軟正黑體", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(12, 17);
+            this.label2.Location = new System.Drawing.Point(12, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(127, 36);
             this.label2.TabIndex = 0;
@@ -72,10 +75,11 @@ namespace RandomSelector
             // 
             // label3
             // 
+            this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(23, 58);
+            this.label3.Location = new System.Drawing.Point(22, 56);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(28, 23);
+            this.label3.Size = new System.Drawing.Size(103, 31);
             this.label3.TabIndex = 0;
             this.label3.Text = "1-";
             // 
@@ -94,21 +98,23 @@ namespace RandomSelector
             0,
             0});
             this.numUpDown.Name = "numUpDown";
-            this.numUpDown.Size = new System.Drawing.Size(77, 31);
-            this.numUpDown.TabIndex = 1;
+            this.numUpDown.Size = new System.Drawing.Size(76, 31);
+            this.numUpDown.TabIndex = 0;
+            this.numUpDown.TabStop = false;
             this.numUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.numUpDown.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInput);
             // 
             // btn_CheckNumber
             // 
             this.btn_CheckNumber.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_CheckNumber.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.btn_CheckNumber.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_CheckNumber.Location = new System.Drawing.Point(19, 99);
+            this.btn_CheckNumber.Location = new System.Drawing.Point(20, 99);
             this.btn_CheckNumber.Name = "btn_CheckNumber";
             this.btn_CheckNumber.Size = new System.Drawing.Size(105, 33);
             this.btn_CheckNumber.TabIndex = 0;
@@ -122,9 +128,9 @@ namespace RandomSelector
             this.btn_Select.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_Select.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.btn_Select.Font = new System.Drawing.Font("微軟正黑體", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_Select.Location = new System.Drawing.Point(161, 312);
+            this.btn_Select.Location = new System.Drawing.Point(170, 364);
             this.btn_Select.Name = "btn_Select";
-            this.btn_Select.Size = new System.Drawing.Size(152, 88);
+            this.btn_Select.Size = new System.Drawing.Size(161, 88);
             this.btn_Select.TabIndex = 0;
             this.btn_Select.Text = "抽獎";
             this.btn_Select.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -132,16 +138,17 @@ namespace RandomSelector
             // 
             // label_unselectNumber
             // 
-            this.label_unselectNumber.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label_unselectNumber.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tableLayoutPanel1.SetColumnSpan(this.label_unselectNumber, 2);
             this.label_unselectNumber.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_unselectNumber.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label_unselectNumber.Location = new System.Drawing.Point(477, 0);
+            this.label_unselectNumber.Location = new System.Drawing.Point(504, 0);
             this.label_unselectNumber.Name = "label_unselectNumber";
             this.tableLayoutPanel1.SetRowSpan(this.label_unselectNumber, 2);
-            this.label_unselectNumber.Size = new System.Drawing.Size(310, 419);
+            this.label_unselectNumber.Size = new System.Drawing.Size(331, 480);
             this.label_unselectNumber.TabIndex = 0;
             this.label_unselectNumber.Text = "0 0";
+            this.label_unselectNumber.Paint += new System.Windows.Forms.PaintEventHandler(this.Label_unselectNumber_Paint);
             // 
             // menuStrip1
             // 
@@ -151,9 +158,10 @@ namespace RandomSelector
             this.進階操作ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(938, 31);
+            this.menuStrip1.Size = new System.Drawing.Size(986, 31);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInput);
             // 
             // 進階操作ToolStripMenuItem
             // 
@@ -179,7 +187,7 @@ namespace RandomSelector
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 31);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(148, 419);
+            this.panel1.Size = new System.Drawing.Size(148, 480);
             this.panel1.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -193,33 +201,48 @@ namespace RandomSelector
             this.tableLayoutPanel1.Controls.Add(this.label_numberDisplay, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label_unselectNumber, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.btn_Select, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer1, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(148, 31);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(790, 419);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(838, 480);
             this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // axWindowsMediaPlayer1
+            // 
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(337, 339);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(75, 23);
+            this.axWindowsMediaPlayer1.TabIndex = 1;
+            this.axWindowsMediaPlayer1.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(938, 450);
+            this.BackColor = System.Drawing.Color.Wheat;
+            this.ClientSize = new System.Drawing.Size(986, 511);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.LoadForm);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInput);
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,6 +262,7 @@ namespace RandomSelector
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripMenuItem tool_reset;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }
 

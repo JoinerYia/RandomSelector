@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,9 +9,12 @@ namespace RandomSelector
 {
     public class PresentationModel
     {
-        public delegate void FormChanged();
+        public delegate void FormChangedEvent();
+        public delegate void SelectEvent();
 
-        public event FormChanged FormChangedEvent;
+        public event FormChangedEvent OnFormChanged;
+        public event SelectEvent Selecting;
+        public event SelectEvent Selected;
 
         private const string DEFUALT_ITEM = "0 0";
 
@@ -52,13 +56,23 @@ namespace RandomSelector
             LoadForm();
         }
 
-        public void UpdateForm(string item)
+        private void UpdateForm(string item)
         {
             if (item == null)
                 item = DEFUALT_ITEM;
             Display = item;
             SetUnselcectNumber();
-            FormChangedEvent?.Invoke();
+            OnFormChanged?.Invoke();
+        }
+
+        private void OnSelecting()
+        {
+            Selecting?.Invoke();
+        }
+
+        private void OnSelected()
+        {
+            Selected?.Invoke();
         }
 
         public void CheckNumber(int maximum)
@@ -82,7 +96,7 @@ namespace RandomSelector
             for (int i = 0; i < list.Count; i++)
             {
                 UnselectNumbers.Append($"{list[i]}, ");
-                if ((i+1) % 6 == 0)
+                if ((i+1) % 7 == 0)
                     UnselectNumbers.AppendLine();
             }
         }
@@ -99,36 +113,44 @@ namespace RandomSelector
             {
                 string selectedNumber = _model.SelectItem();
 
-                if(selectedNumber==null)
+                if (selectedNumber == null)
                 {
                     UpdateForm(DEFUALT_ITEM);
                     _isSelecting = false;
                     return;
                 }
 
-                int tempNumber;
-                const int TOTAL_MILLISECONDS = 2000;
-                const int NUMBER_OF_TRANSITION = 20;
-
-                for (int i = 0; i < NUMBER_OF_TRANSITION; i++)
-                {
-                    tempNumber = _random.Next(99) + 1;
-                    UpdateForm($"{tempNumber / 10} {tempNumber % 10}");
-                    Thread.Sleep(TOTAL_MILLISECONDS / NUMBER_OF_TRANSITION / 2);
-                }
-
-                for (int i = 0; i < NUMBER_OF_TRANSITION; i++)
-                {
-                    tempNumber = _random.Next(99) + 1;
-                    UpdateForm($"{selectedNumber[0]} {tempNumber % 10}");
-                    Thread.Sleep(TOTAL_MILLISECONDS / NUMBER_OF_TRANSITION / 2);
-                }
-
-                _model.RemoveItem(selectedNumber);
-                UpdateForm(selectedNumber);
+                OnSelecting();
+                RunSelectTransition(selectedNumber);
+                Thread.Sleep(500);
+                OnSelected();
 
                 _isSelecting = false;
             });
+        }
+
+        private void RunSelectTransition(string selectedNumber)
+        {
+            int tempNumber;
+            const int TOTAL_MILLISECONDS = 2000;
+            const int NUMBER_OF_TRANSITION = 20;
+
+            for (int i = 0; i < NUMBER_OF_TRANSITION; i++)
+            {
+                tempNumber = _random.Next(99) + 1;
+                UpdateForm($"{tempNumber / 10} {tempNumber % 10}");
+                Thread.Sleep(TOTAL_MILLISECONDS / NUMBER_OF_TRANSITION / 2);
+            }
+
+            for (int i = 0; i < NUMBER_OF_TRANSITION; i++)
+            {
+                tempNumber = _random.Next(99) + 1;
+                UpdateForm($"{selectedNumber[0]} {tempNumber % 10}");
+                Thread.Sleep(TOTAL_MILLISECONDS / NUMBER_OF_TRANSITION / 2);
+            }
+
+            _model.RemoveItem(selectedNumber);
+            UpdateForm(selectedNumber);
         }
     }
 }

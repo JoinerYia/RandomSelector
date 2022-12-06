@@ -15,7 +15,8 @@ namespace RandomSelector
     {
         private RandomSelectorModel _model;
         private PresentationModel _pModel;
-        private readonly Color[] _buttonColor = { SystemColors.ButtonFace, SystemColors.ButtonHighlight };
+        private readonly Color[] _buttonColor = { Color.LightGray, SystemColors.ButtonHighlight };
+        Graphics _graphis;
 
         public Form1()
         {
@@ -24,13 +25,19 @@ namespace RandomSelector
 
         private void LoadForm(object sender, EventArgs e)
         {
+            _graphis = label_unselectNumber.CreateGraphics();
+
             _model = new RandomSelectorModel();
             _pModel = new PresentationModel(_model);
-            _pModel.FormChangedEvent += PModel_formChangedEvent;
+            _pModel.OnFormChanged += PModel_FormChangedEvent;
+            _pModel.Selecting += PModel_SelctingEvent;
             _pModel.LoadForm();
+
+            StopSelectMusic();
+            //this.Cursor = new Cursor();
         }
 
-        private void PModel_formChangedEvent()
+        private void PModel_FormChangedEvent()
         {
             if (_pModel.IsBeginSelect)
             {
@@ -45,13 +52,19 @@ namespace RandomSelector
 
             if (this.InvokeRequired)
             {
-                MethodInvoker invoker = new MethodInvoker(PModel_formChangedEvent);
+                MethodInvoker invoker = new MethodInvoker(PModel_FormChangedEvent);
                 this.Invoke(invoker);
             }
             else
                 label_numberDisplay.Text = _pModel.Display;
 
             label_unselectNumber.Text = _pModel.UnselectNumbers.ToString();
+        }
+
+        private void PModel_SelctingEvent()
+        {
+            StopSelectMusic();
+            StartSelectMusic();
         }
 
         private void Btn_CheckNumber_Click(object sender, EventArgs e)
@@ -67,6 +80,45 @@ namespace RandomSelector
         private void Btn_Select_Click(object sender, EventArgs e)
         {
             _pModel.SelectANumber();
+        }
+
+        private void Label_unselectNumber_Paint(object sender, PaintEventArgs e)
+        {
+            this.Text = this.Width + "/" + this.Height;
+            int width = label_unselectNumber.Width;
+            int height = label_unselectNumber.Height;
+
+            for (int x = 0; x < width; x += 30)
+            {
+                e.Graphics.DrawLine(Pens.Black, x, 0, x, height);
+            }
+
+            for (int y = 0; y < height; y += 20)
+            {
+               e.Graphics.DrawLine(Pens.Black, 0, y, width, y);
+            }
+        }
+
+        private void KeyInput(object sender, KeyEventArgs e)
+        {
+            switch(e.KeyCode)
+            {
+                case Keys.Enter:
+                    Btn_Select_Click(null, null);
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        private void StartSelectMusic()
+        {
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+        }
+
+        private void StopSelectMusic()
+        {
+            axWindowsMediaPlayer1.Ctlcontrols.stop();
         }
     }
 }
