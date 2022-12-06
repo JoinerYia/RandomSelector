@@ -84,7 +84,6 @@ namespace RandomSelector
 
         private void Label_unselectNumber_Paint(object sender, PaintEventArgs e)
         {
-            this.Text = this.Width + "/" + this.Height;
             int width = label_unselectNumber.Width;
             int height = label_unselectNumber.Height;
 
@@ -119,6 +118,11 @@ namespace RandomSelector
         private void StopSelectMusic()
         {
             axWindowsMediaPlayer1.Ctlcontrols.stop();
+        }
+
+        private void Label_unselectNumber_Resize(object sender, EventArgs e)
+        {
+            label_unselectNumber.Image = new Bitmap(Properties.Resources.PADORU, label_unselectNumber.Size);
         }
     }
 }

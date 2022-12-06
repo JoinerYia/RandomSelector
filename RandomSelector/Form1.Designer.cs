@@ -36,12 +36,12 @@ namespace RandomSelector
             this.numUpDown = new System.Windows.Forms.NumericUpDown();
             this.btn_CheckNumber = new System.Windows.Forms.Label();
             this.btn_Select = new System.Windows.Forms.Label();
-            this.label_unselectNumber = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.進階操作ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tool_reset = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label_unselectNumber = new System.Windows.Forms.Label();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -136,20 +136,6 @@ namespace RandomSelector
             this.btn_Select.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btn_Select.Click += new System.EventHandler(this.Btn_Select_Click);
             // 
-            // label_unselectNumber
-            // 
-            this.label_unselectNumber.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tableLayoutPanel1.SetColumnSpan(this.label_unselectNumber, 2);
-            this.label_unselectNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label_unselectNumber.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label_unselectNumber.Location = new System.Drawing.Point(504, 0);
-            this.label_unselectNumber.Name = "label_unselectNumber";
-            this.tableLayoutPanel1.SetRowSpan(this.label_unselectNumber, 2);
-            this.label_unselectNumber.Size = new System.Drawing.Size(331, 480);
-            this.label_unselectNumber.TabIndex = 0;
-            this.label_unselectNumber.Text = "0 0";
-            this.label_unselectNumber.Paint += new System.Windows.Forms.PaintEventHandler(this.Label_unselectNumber_Paint);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
@@ -180,6 +166,7 @@ namespace RandomSelector
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.numUpDown);
             this.panel1.Controls.Add(this.label3);
@@ -192,6 +179,7 @@ namespace RandomSelector
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -211,6 +199,22 @@ namespace RandomSelector
             this.tableLayoutPanel1.Size = new System.Drawing.Size(838, 480);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
+            // label_unselectNumber
+            // 
+            this.label_unselectNumber.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tableLayoutPanel1.SetColumnSpan(this.label_unselectNumber, 2);
+            this.label_unselectNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label_unselectNumber.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_unselectNumber.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label_unselectNumber.Location = new System.Drawing.Point(504, 0);
+            this.label_unselectNumber.Name = "label_unselectNumber";
+            this.tableLayoutPanel1.SetRowSpan(this.label_unselectNumber, 2);
+            this.label_unselectNumber.Size = new System.Drawing.Size(331, 480);
+            this.label_unselectNumber.TabIndex = 0;
+            this.label_unselectNumber.Text = "0 0";
+            this.label_unselectNumber.Paint += new System.Windows.Forms.PaintEventHandler(this.Label_unselectNumber_Paint);
+            this.label_unselectNumber.Resize += new System.EventHandler(this.Label_unselectNumber_Resize);
+            // 
             // axWindowsMediaPlayer1
             // 
             this.axWindowsMediaPlayer1.Enabled = true;
@@ -225,7 +229,8 @@ namespace RandomSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Wheat;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this.BackgroundImage = global::RandomSelector.Properties.Resources.Background;
             this.ClientSize = new System.Drawing.Size(986, 511);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
