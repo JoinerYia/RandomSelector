@@ -79,5 +79,15 @@ namespace RandomSelector.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        /// </summary>
+        internal static byte[] SelectSound {
+            get {
+                object obj = ResourceManager.GetObject("SelectSound", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

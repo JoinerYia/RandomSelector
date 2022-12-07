@@ -107,5 +107,8 @@
   <ItemGroup>
     <None Include="Resources\PADORU.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\抽獎音效.mp3" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
