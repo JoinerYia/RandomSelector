@@ -15,17 +15,18 @@ namespace RandomSelector
     {
         private RandomSelectorModel _model;
         private PresentationModel _pModel;
-        private readonly Color[] _buttonColor = { Color.LightGray, SystemColors.ButtonHighlight };
+        private readonly Color[] _buttonColor = { Color.Gray, SystemColors.ButtonHighlight };
         Graphics _graphis;
 
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void LoadForm(object sender, EventArgs e)
         {
-            _graphis = label_unselectNumber.CreateGraphics();
+            _graphis = pictureBox_numberDisplay.CreateGraphics();
 
             _model = new RandomSelectorModel();
             _pModel = new PresentationModel(_model);
@@ -56,9 +57,11 @@ namespace RandomSelector
                 this.Invoke(invoker);
             }
             else
-                label_numberDisplay.Text = _pModel.Display;
+            {
+                pictureBox_numberDisplay.Image = _pModel.Display;
+            }
 
-            label_unselectNumber.Text = _pModel.UnselectNumbers.ToString();
+            PictureBox_unselectNumber.Image = _pModel.UnselectNumbers;
         }
 
         private void PModel_SelctingEvent()
@@ -84,9 +87,10 @@ namespace RandomSelector
 
         private void Label_unselectNumber_Paint(object sender, PaintEventArgs e)
         {
-            int width = label_unselectNumber.Width;
-            int height = label_unselectNumber.Height;
+            int width = PictureBox_unselectNumber.Width;
+            int height = PictureBox_unselectNumber.Height;
 
+            return;
             for (int x = 0; x < width; x += 30)
             {
                 e.Graphics.DrawLine(Pens.Black, x, 0, x, height);
@@ -120,9 +124,9 @@ namespace RandomSelector
             axWindowsMediaPlayer1.Ctlcontrols.stop();
         }
 
-        private void Label_unselectNumber_Resize(object sender, EventArgs e)
+        private void PictureBox_unselectNumber_ReSize(object sender, EventArgs e)
         {
-            label_unselectNumber.Image = new Bitmap(Properties.Resources.PADORU, label_unselectNumber.Size);
+            PictureBox_unselectNumber.BackgroundImage = new Bitmap(Properties.Resources.PADORU, PictureBox_unselectNumber.Size);
         }
     }
 }

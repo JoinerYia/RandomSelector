@@ -30,7 +30,6 @@ namespace RandomSelector
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label_numberDisplay = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.numUpDown = new System.Windows.Forms.NumericUpDown();
@@ -41,27 +40,17 @@ namespace RandomSelector
             this.tool_reset = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label_unselectNumber = new System.Windows.Forms.Label();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.pictureBox_numberDisplay = new System.Windows.Forms.PictureBox();
+            this.PictureBox_unselectNumber = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_numberDisplay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_unselectNumber)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label_numberDisplay
-            // 
-            this.label_numberDisplay.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tableLayoutPanel1.SetColumnSpan(this.label_numberDisplay, 3);
-            this.label_numberDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label_numberDisplay.Font = new System.Drawing.Font("微軟正黑體", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label_numberDisplay.Location = new System.Drawing.Point(3, 0);
-            this.label_numberDisplay.Name = "label_numberDisplay";
-            this.label_numberDisplay.Size = new System.Drawing.Size(495, 336);
-            this.label_numberDisplay.TabIndex = 0;
-            this.label_numberDisplay.Text = "0 0";
-            this.label_numberDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -186,10 +175,10 @@ namespace RandomSelector
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.label_numberDisplay, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label_unselectNumber, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.btn_Select, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer1, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox_numberDisplay, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.PictureBox_unselectNumber, 3, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(148, 31);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -198,22 +187,6 @@ namespace RandomSelector
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(838, 480);
             this.tableLayoutPanel1.TabIndex = 4;
-            // 
-            // label_unselectNumber
-            // 
-            this.label_unselectNumber.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tableLayoutPanel1.SetColumnSpan(this.label_unselectNumber, 2);
-            this.label_unselectNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label_unselectNumber.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label_unselectNumber.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label_unselectNumber.Location = new System.Drawing.Point(504, 0);
-            this.label_unselectNumber.Name = "label_unselectNumber";
-            this.tableLayoutPanel1.SetRowSpan(this.label_unselectNumber, 2);
-            this.label_unselectNumber.Size = new System.Drawing.Size(331, 480);
-            this.label_unselectNumber.TabIndex = 0;
-            this.label_unselectNumber.Text = "0 0";
-            this.label_unselectNumber.Paint += new System.Windows.Forms.PaintEventHandler(this.Label_unselectNumber_Paint);
-            this.label_unselectNumber.Resize += new System.EventHandler(this.Label_unselectNumber_Resize);
             // 
             // axWindowsMediaPlayer1
             // 
@@ -224,6 +197,30 @@ namespace RandomSelector
             this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(75, 23);
             this.axWindowsMediaPlayer1.TabIndex = 1;
             this.axWindowsMediaPlayer1.Visible = false;
+            // 
+            // pictureBox_numberDisplay
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.pictureBox_numberDisplay, 3);
+            this.pictureBox_numberDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox_numberDisplay.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox_numberDisplay.Name = "pictureBox_numberDisplay";
+            this.pictureBox_numberDisplay.Size = new System.Drawing.Size(495, 330);
+            this.pictureBox_numberDisplay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox_numberDisplay.TabIndex = 2;
+            this.pictureBox_numberDisplay.TabStop = false;
+            // 
+            // PictureBox_unselectNumber
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.PictureBox_unselectNumber, 2);
+            this.PictureBox_unselectNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PictureBox_unselectNumber.Location = new System.Drawing.Point(504, 3);
+            this.PictureBox_unselectNumber.Name = "PictureBox_unselectNumber";
+            this.tableLayoutPanel1.SetRowSpan(this.PictureBox_unselectNumber, 2);
+            this.PictureBox_unselectNumber.Size = new System.Drawing.Size(331, 474);
+            this.PictureBox_unselectNumber.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBox_unselectNumber.TabIndex = 3;
+            this.PictureBox_unselectNumber.TabStop = false;
+            this.PictureBox_unselectNumber.Resize += new System.EventHandler(this.PictureBox_unselectNumber_ReSize);
             // 
             // Form1
             // 
@@ -248,26 +245,27 @@ namespace RandomSelector
             this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_numberDisplay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_unselectNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label_numberDisplay;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numUpDown;
         private System.Windows.Forms.Label btn_CheckNumber;
         private System.Windows.Forms.Label btn_Select;
-        private System.Windows.Forms.Label label_unselectNumber;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 進階操作ToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripMenuItem tool_reset;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
+        private System.Windows.Forms.PictureBox pictureBox_numberDisplay;
+        private System.Windows.Forms.PictureBox PictureBox_unselectNumber;
     }
 }
 

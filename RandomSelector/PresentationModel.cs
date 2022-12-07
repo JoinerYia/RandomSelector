@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,10 +16,12 @@ namespace RandomSelector
         public event SelectEvent Selecting;
         public event SelectEvent Selected;
 
-        private const string DEFUALT_ITEM = "0 0";
+        private const string DEFUALT_ITEM = "00";
 
         readonly RandomSelectorModel _model;
         readonly Random _random = new Random();
+        private Graphics _displayGraphics;
+        private Graphics _unselectNumbersGraphics;
 
         private bool _isSelecting;
         public bool IsBeginSelect
@@ -26,12 +29,12 @@ namespace RandomSelector
             get;
             private set;
         }
-        public string Display
+        public Bitmap Display
         {
             get;
             private set;
         }
-        public StringBuilder UnselectNumbers
+        public Bitmap UnselectNumbers
         {
             get;
             private set;
@@ -59,7 +62,8 @@ namespace RandomSelector
         {
             if (item == null)
                 item = DEFUALT_ITEM;
-            Display = item;
+
+            SetDisplay(item);
             SetUnselcectNumber();
             OnFormChanged?.Invoke();
         }
@@ -81,22 +85,45 @@ namespace RandomSelector
             _model.ClearList();
             for (int i = 1; i <= maximum; i++)
             {
-                _model.AddItem($"{i / 10} {i % 10}");
+                _model.AddItem($"{i / 10}{i % 10}");
             }
             IsBeginSelect = true;
             LoadForm();
         }
 
+        private void SetDisplay(string item)
+        {
+            Display = new Bitmap(300, 300);
+            _displayGraphics = Graphics.FromImage(Display);
+
+            StringFormat format = new StringFormat();
+            format.Alignment = StringAlignment.Center;
+            format.LineAlignment = StringAlignment.Center;
+            Rectangle rectangle = new Rectangle(0, 0, Display.Width, Display.Height);
+            Font font = new Font("微軟正黑體", 72F);
+
+            _displayGraphics.DrawString(item.Insert(1, " "), font, Brushes.WhiteSmoke, rectangle, format);
+        }
+
         private void SetUnselcectNumber()
         {
-            List<string> list = _model.GetList();
-            UnselectNumbers = new StringBuilder();
+            UnselectNumbers = new Bitmap(300, 500);
+            _unselectNumbersGraphics = Graphics.FromImage(UnselectNumbers);
 
-            for (int i = 0; i < list.Count; i++)
+            StringFormat format = new StringFormat();
+            format.Alignment = StringAlignment.Center;
+            format.LineAlignment = StringAlignment.Center;
+            Font font = new Font("微軟正黑體", 16F);
+            int fontWidth = 40;
+            int fontHeight = 20;
+
+            List<string> list = _model.GetList();
+            for (int i = 0, y = 0; i < list.Count; y += fontHeight)
             {
-                UnselectNumbers.Append($"{list[i]}, ");
-                if ((i+1) % 7 == 0)
-                    UnselectNumbers.AppendLine();
+                for (int x = 0; x < (UnselectNumbers.Width - fontWidth) && i < list.Count; i++, x += fontWidth)
+                {
+                    _unselectNumbersGraphics.DrawString($"{list[i]}, ", font, Brushes.WhiteSmoke, x, y);
+                }
             }
         }
 
@@ -137,14 +164,14 @@ namespace RandomSelector
             for (int i = 0; i < NUMBER_OF_TRANSITION; i++)
             {
                 tempNumber = _random.Next(99) + 1;
-                UpdateForm($"{tempNumber / 10} {tempNumber % 10}");
+                UpdateForm($"{tempNumber / 10}{tempNumber % 10}");
                 Thread.Sleep(TOTAL_MILLISECONDS / NUMBER_OF_TRANSITION / 2);
             }
 
             for (int i = 0; i < NUMBER_OF_TRANSITION; i++)
             {
                 tempNumber = _random.Next(99) + 1;
-                UpdateForm($"{selectedNumber[0]} {tempNumber % 10}");
+                UpdateForm($"{selectedNumber[0]}{tempNumber % 10}");
                 Thread.Sleep(TOTAL_MILLISECONDS / NUMBER_OF_TRANSITION / 2);
             }
 
