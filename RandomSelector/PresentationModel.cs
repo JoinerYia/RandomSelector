@@ -14,6 +14,7 @@ namespace RandomSelector
 
         public event FormChangedEvent OnFormChanged;
         public event SelectEvent Selecting;
+        public event SelectEvent SelectFail;
         public event SelectEvent Selected;
 
         private const string DEFUALT_ITEM = "00";
@@ -71,6 +72,11 @@ namespace RandomSelector
         private void OnSelecting()
         {
             Selecting?.Invoke();
+        }
+
+        private void OnSelectFail()
+        {
+            SelectFail?.Invoke();
         }
 
         private void OnSelected()
@@ -142,6 +148,7 @@ namespace RandomSelector
                 if (selectedNumber == null)
                 {
                     UpdateForm(DEFUALT_ITEM);
+                    OnSelectFail();
                     _isSelecting = false;
                     return;
                 }

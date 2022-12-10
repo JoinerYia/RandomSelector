@@ -110,5 +110,11 @@
   <ItemGroup>
     <None Include="bin\Debug\抽獎音效.mp3" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Padoru.mp3" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

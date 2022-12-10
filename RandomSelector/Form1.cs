@@ -31,11 +31,9 @@ namespace RandomSelector
             _model = new RandomSelectorModel();
             _pModel = new PresentationModel(_model);
             _pModel.OnFormChanged += PModel_FormChangedEvent;
-            _pModel.Selecting += PModel_SelctingEvent;
+            _pModel.Selecting += PModel_SelectingEvent;
+            _pModel.SelectFail += PModel_SelectFailEvent;
             _pModel.LoadForm();
-
-            StopSelectMusic();
-            //this.Cursor = new Cursor();
         }
 
         private void PModel_FormChangedEvent()
@@ -64,10 +62,19 @@ namespace RandomSelector
             PictureBox_unselectNumber.Image = _pModel.UnselectNumbers;
         }
 
-        private void PModel_SelctingEvent()
+        private void PModel_SelectingEvent()
         {
             StopSelectMusic();
             StartSelectMusic();
+        }
+
+        private void PModel_SelectFailEvent()
+        {
+            StopSelectMusic();
+            axWindowsMediaPlayer1.URL = ".\\Padoru.mp3";
+            StartSelectMusic();
+            Thread.Sleep(13000);
+            axWindowsMediaPlayer1.URL = ".\\抽獎音效.mp3";
         }
 
         private void Btn_CheckNumber_Click(object sender, EventArgs e)
