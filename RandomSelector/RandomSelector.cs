@@ -9,6 +9,14 @@ namespace RandomSelector
         private List<string> _list;
         readonly Random _random = new Random();
 
+        public bool IsEmpty
+        {
+            get
+            {
+                return _list.Count == 0;
+            }
+        }
+
         public RandomSelectorModel()
         {
             ClearList();
@@ -34,14 +42,20 @@ namespace RandomSelector
             _list.Remove(item);
         }
 
+        public bool Contain(string item)
+        {
+            return _list.Contains(item);
+        }
+
         public List<string> GetList()
         {
             return _list;
         }
+
         public string SelectItem()
         {
             int numberOfItem = _list.Count();
-            if (numberOfItem == 0)
+            if (this.IsEmpty)
                 return null;
             int n = _random.Next(numberOfItem);
             return _list[n];

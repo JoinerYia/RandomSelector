@@ -23,12 +23,29 @@ namespace RandomSelector
         readonly Random _random = new Random();
         private Graphics _displayGraphics;
         private Graphics _unselectNumbersGraphics;
+        private int? _editingNumber = null;
+
+        private const int fontWidth = 40;
+        private const int fontHeight = 20;
+        private const int numberOfMaximum = 99;
 
         private bool _isSelecting;
         public bool IsBeginSelect
         {
             get;
             private set;
+        }
+        public bool IsEditMode
+        {
+            get;
+            private set;
+        }
+        public bool IsEmpty
+        {
+            get
+            {
+                return _model.IsEmpty;
+            }
         }
         public Bitmap Display
         {
@@ -44,6 +61,7 @@ namespace RandomSelector
         public PresentationModel(RandomSelectorModel model)
         {
             _model = model;
+            IsEditMode = false;
             Reset();
         }
 
@@ -59,14 +77,22 @@ namespace RandomSelector
             LoadForm();
         }
 
+        private void UpdateForm()
+        {
+            DrawUnselcectNumber();
+            if (IsEditMode)
+                DrawEdittingNumber();
+            OnFormChanged?.Invoke();
+        }
+
         private void UpdateForm(string item)
         {
             if (item == null)
                 item = DEFUALT_ITEM;
 
-            SetDisplay(item);
-            SetUnselcectNumber();
-            OnFormChanged?.Invoke();
+            DrawDisplay(item);
+
+            UpdateForm();
         }
 
         private void OnSelecting()
@@ -84,6 +110,11 @@ namespace RandomSelector
             Selected?.Invoke();
         }
 
+        public void SetEditMode(bool status)
+        {
+            IsEditMode = status;
+        }
+
         public void CheckNumber(int maximum)
         {
             if (IsBeginSelect)
@@ -97,7 +128,7 @@ namespace RandomSelector
             LoadForm();
         }
 
-        private void SetDisplay(string item)
+        private void DrawDisplay(string item)
         {
             Display = new Bitmap(300, 300);
             _displayGraphics = Graphics.FromImage(Display);
@@ -111,26 +142,49 @@ namespace RandomSelector
             _displayGraphics.DrawString(item.Insert(1, " "), font, Brushes.WhiteSmoke, rectangle, format);
         }
 
-        private void SetUnselcectNumber()
+        private void DrawUnselcectNumber()
         {
             UnselectNumbers = new Bitmap(300, 500);
             _unselectNumbersGraphics = Graphics.FromImage(UnselectNumbers);
 
-            StringFormat format = new StringFormat();
-            format.Alignment = StringAlignment.Center;
-            format.LineAlignment = StringAlignment.Center;
-            Font font = new Font("微軟正黑體", 16F);
-            int fontWidth = 40;
-            int fontHeight = 20;
-
-            List<string> list = _model.GetList();
-            for (int i = 0, y = 0; i < list.Count; y += fontHeight)
+            StringFormat format = new StringFormat
             {
-                for (int x = 0; x < (UnselectNumbers.Width - fontWidth) && i < list.Count; i++, x += fontWidth)
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+            Font font = new Font("微軟正黑體", 16F);
+
+            for (int i = 1, y = 0; i <= numberOfMaximum; y += fontHeight)
+            {
+                for (int x = 0; x < (UnselectNumbers.Width - fontWidth) && i <= numberOfMaximum; i++, x += fontWidth)
                 {
-                    _unselectNumbersGraphics.DrawString($"{list[i]}, ", font, Brushes.WhiteSmoke, x, y);
+                    string item = $"{i / 10}{i % 10}";
+                    if (_model.Contain(item))
+                        _unselectNumbersGraphics.DrawString($"{item}, ", font, Brushes.White, x, y);
                 }
             }
+        }
+
+        private void DrawEdittingNumber()
+        {
+            if (_editingNumber == null)
+                return;
+
+            StringFormat format = new StringFormat();
+            Font font = new Font("微軟正黑體", 16F);
+
+            int NumberInARow = UnselectNumbers.Width / fontWidth;
+            int indexOfeditingNumber = (int)_editingNumber - 1;
+            int x = (int)(fontWidth * (indexOfeditingNumber % NumberInARow));
+            int y = (int)(fontHeight * (indexOfeditingNumber / NumberInARow));
+            string item = $"{_editingNumber / 10}{_editingNumber % 10}";
+
+            const int rectXOffset = 0;
+            const int rectYOffset = 5;
+
+            _unselectNumbersGraphics.DrawRectangle(Pens.DarkSeaGreen, x + rectXOffset, y + rectYOffset, fontWidth, fontHeight);
+            if (!_model.Contain(item))
+                _unselectNumbersGraphics.DrawString($"{item}, ", font, Brushes.Orange, x, y);
         }
 
         public void SelectANumber()
@@ -160,6 +214,31 @@ namespace RandomSelector
 
                 _isSelecting = false;
             });
+        }
+
+        public void SelectEdittingNumber(int x, int y, int width, int height)
+        {
+            x -= width / 2;
+            y -= height / 2;
+            if ((1.0 * UnselectNumbers.Width / width) > (1.0 * UnselectNumbers.Height / height))
+                height = UnselectNumbers.Height * width/ UnselectNumbers.Width;
+            else width = UnselectNumbers.Width * height/ UnselectNumbers.Height;
+
+            x = x * UnselectNumbers.Width / width;
+            y = y * UnselectNumbers.Height / height;
+            x += UnselectNumbers.Width / 2;
+            y += UnselectNumbers.Height / 2;
+
+            int NumberInARow = UnselectNumbers.Width / fontWidth;
+            if (x / fontWidth >= NumberInARow)
+                _editingNumber = null;
+            else
+            {
+                _editingNumber = (y / fontHeight) * NumberInARow + (x / fontWidth) + 1;
+                if (_editingNumber > numberOfMaximum || _editingNumber <= 0)
+                    _editingNumber = null;
+            }
+            UpdateForm();
         }
 
         private void RunSelectTransition(string selectedNumber)

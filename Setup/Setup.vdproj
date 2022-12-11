@@ -389,8 +389,8 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:RandomSelector"
-        "ProductCode" = "8:{AFE2CC01-F758-458A-A1B8-D95435D7036A}"
-        "PackageCode" = "8:{DF4373BB-DF18-41BE-98E5-96B24B429EB2}"
+        "ProductCode" = "8:{D9395355-F78F-47A3-A5C1-70AE1346140B}"
+        "PackageCode" = "8:{A316FF66-645C-4EA0-A0B9-6CDC49701037}"
         "UpgradeCode" = "8:{529319BF-7618-4D15-A640-82793E46A7D5}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"

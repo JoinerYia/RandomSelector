@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RandomSelector
@@ -32,7 +26,7 @@ namespace RandomSelector
             _pModel = new PresentationModel(_model);
             _pModel.OnFormChanged += PModel_FormChangedEvent;
             _pModel.Selecting += PModel_SelectingEvent;
-            _pModel.SelectFail += PModel_SelectFailEvent;
+            _pModel.Selected += PModel_SelectedEvent;
             _pModel.LoadForm();
         }
 
@@ -59,7 +53,7 @@ namespace RandomSelector
                 pictureBox_numberDisplay.Image = _pModel.Display;
             }
 
-            PictureBox_unselectNumber.Image = _pModel.UnselectNumbers;
+            pictureBox_unselectNumber.Image = _pModel.UnselectNumbers;
         }
 
         private void PModel_SelectingEvent()
@@ -68,8 +62,10 @@ namespace RandomSelector
             StartSelectMusic();
         }
 
-        private void PModel_SelectFailEvent()
+        private void PModel_SelectedEvent()
         {
+            if (!_pModel.IsEmpty)
+                return;
             StopSelectMusic();
             axWindowsMediaPlayer1.URL = ".\\Padoru.mp3";
             StartSelectMusic();
@@ -94,19 +90,8 @@ namespace RandomSelector
 
         private void Label_unselectNumber_Paint(object sender, PaintEventArgs e)
         {
-            int width = PictureBox_unselectNumber.Width;
-            int height = PictureBox_unselectNumber.Height;
-
-            return;
-            for (int x = 0; x < width; x += 30)
-            {
-                e.Graphics.DrawLine(Pens.Black, x, 0, x, height);
-            }
-
-            for (int y = 0; y < height; y += 20)
-            {
-               e.Graphics.DrawLine(Pens.Black, 0, y, width, y);
-            }
+            int width = pictureBox_unselectNumber.Width;
+            int height = pictureBox_unselectNumber.Height;
         }
 
         private void KeyInput(object sender, KeyEventArgs e)
@@ -133,7 +118,33 @@ namespace RandomSelector
 
         private void PictureBox_unselectNumber_ReSize(object sender, EventArgs e)
         {
-            PictureBox_unselectNumber.BackgroundImage = new Bitmap(Properties.Resources.PADORU, PictureBox_unselectNumber.Size);
+            pictureBox_unselectNumber.BackgroundImage = new Bitmap(Properties.Resources.PADORU, pictureBox_unselectNumber.Size);
+        }
+
+        private void SelectEdittingNumber(object sender, MouseEventArgs e)
+        {
+            _pModel.SelectEdittingNumber(e.X, e.Y, pictureBox_unselectNumber.Width, pictureBox_unselectNumber.Height);
+        }
+
+        private void pictureBox_unselectNumber_MouseLeave(object sender, EventArgs e)
+        {
+            _pModel.SelectEdittingNumber(-100, -100, pictureBox_unselectNumber.Width, pictureBox_unselectNumber.Height);
+        }
+
+        private void 開啟ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _pModel.SetEditMode(true);
+        }
+
+        private void 關閉ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _pModel.SetEditMode(true);
+        }
+
+        private void 說明ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            const string message = "編輯模式開啟時，點擊右側數字可以新增或移除數字。";
+            MessageBox.Show(message, "說明");
         }
     }
 }

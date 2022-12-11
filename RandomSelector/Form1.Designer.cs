@@ -41,14 +41,18 @@ namespace RandomSelector
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox_numberDisplay = new System.Windows.Forms.PictureBox();
-            this.PictureBox_unselectNumber = new System.Windows.Forms.PictureBox();
+            this.pictureBox_unselectNumber = new System.Windows.Forms.PictureBox();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.編輯模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.開啟ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.關閉ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_numberDisplay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_unselectNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_unselectNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,7 +121,7 @@ namespace RandomSelector
             this.btn_Select.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_Select.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.btn_Select.Font = new System.Drawing.Font("微軟正黑體", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_Select.Location = new System.Drawing.Point(170, 364);
+            this.btn_Select.Location = new System.Drawing.Point(170, 363);
             this.btn_Select.Name = "btn_Select";
             this.btn_Select.Size = new System.Drawing.Size(161, 88);
             this.btn_Select.TabIndex = 0;
@@ -133,7 +137,7 @@ namespace RandomSelector
             this.進階操作ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(986, 31);
+            this.menuStrip1.Size = new System.Drawing.Size(986, 32);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyInput);
@@ -141,15 +145,16 @@ namespace RandomSelector
             // 進階操作ToolStripMenuItem
             // 
             this.進階操作ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tool_reset});
+            this.tool_reset,
+            this.編輯模式ToolStripMenuItem});
             this.進階操作ToolStripMenuItem.Name = "進階操作ToolStripMenuItem";
-            this.進階操作ToolStripMenuItem.Size = new System.Drawing.Size(98, 27);
+            this.進階操作ToolStripMenuItem.Size = new System.Drawing.Size(98, 28);
             this.進階操作ToolStripMenuItem.Text = "進階操作";
             // 
             // tool_reset
             // 
             this.tool_reset.Name = "tool_reset";
-            this.tool_reset.Size = new System.Drawing.Size(146, 34);
+            this.tool_reset.Size = new System.Drawing.Size(270, 34);
             this.tool_reset.Text = "重置";
             this.tool_reset.Click += new System.EventHandler(this.Tool_reset_Click);
             // 
@@ -161,9 +166,9 @@ namespace RandomSelector
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.btn_CheckNumber);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 31);
+            this.panel1.Location = new System.Drawing.Point(0, 32);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(148, 480);
+            this.panel1.Size = new System.Drawing.Size(148, 479);
             this.panel1.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -177,15 +182,15 @@ namespace RandomSelector
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Controls.Add(this.btn_Select, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox_numberDisplay, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.PictureBox_unselectNumber, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox_unselectNumber, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer1, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(148, 31);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(148, 32);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(838, 480);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(838, 479);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // pictureBox_numberDisplay
@@ -194,33 +199,67 @@ namespace RandomSelector
             this.pictureBox_numberDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox_numberDisplay.Location = new System.Drawing.Point(3, 3);
             this.pictureBox_numberDisplay.Name = "pictureBox_numberDisplay";
-            this.pictureBox_numberDisplay.Size = new System.Drawing.Size(495, 330);
+            this.pictureBox_numberDisplay.Size = new System.Drawing.Size(495, 329);
             this.pictureBox_numberDisplay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox_numberDisplay.TabIndex = 2;
             this.pictureBox_numberDisplay.TabStop = false;
             // 
-            // PictureBox_unselectNumber
+            // pictureBox_unselectNumber
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.PictureBox_unselectNumber, 2);
-            this.PictureBox_unselectNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PictureBox_unselectNumber.Location = new System.Drawing.Point(504, 3);
-            this.PictureBox_unselectNumber.Name = "PictureBox_unselectNumber";
-            this.tableLayoutPanel1.SetRowSpan(this.PictureBox_unselectNumber, 2);
-            this.PictureBox_unselectNumber.Size = new System.Drawing.Size(331, 474);
-            this.PictureBox_unselectNumber.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBox_unselectNumber.TabIndex = 3;
-            this.PictureBox_unselectNumber.TabStop = false;
-            this.PictureBox_unselectNumber.Resize += new System.EventHandler(this.PictureBox_unselectNumber_ReSize);
+            this.pictureBox_unselectNumber.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.SetColumnSpan(this.pictureBox_unselectNumber, 2);
+            this.pictureBox_unselectNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox_unselectNumber.Location = new System.Drawing.Point(504, 3);
+            this.pictureBox_unselectNumber.Name = "pictureBox_unselectNumber";
+            this.tableLayoutPanel1.SetRowSpan(this.pictureBox_unselectNumber, 2);
+            this.pictureBox_unselectNumber.Size = new System.Drawing.Size(331, 473);
+            this.pictureBox_unselectNumber.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_unselectNumber.TabIndex = 3;
+            this.pictureBox_unselectNumber.TabStop = false;
+            this.pictureBox_unselectNumber.MouseLeave += new System.EventHandler(this.pictureBox_unselectNumber_MouseLeave);
+            this.pictureBox_unselectNumber.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SelectEdittingNumber);
+            this.pictureBox_unselectNumber.Resize += new System.EventHandler(this.PictureBox_unselectNumber_ReSize);
             // 
             // axWindowsMediaPlayer1
             // 
             this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(337, 339);
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(337, 338);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
             this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(75, 23);
             this.axWindowsMediaPlayer1.TabIndex = 4;
             this.axWindowsMediaPlayer1.Visible = false;
+            // 
+            // 編輯模式ToolStripMenuItem
+            // 
+            this.編輯模式ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.開啟ToolStripMenuItem,
+            this.關閉ToolStripMenuItem,
+            this.說明ToolStripMenuItem});
+            this.編輯模式ToolStripMenuItem.Name = "編輯模式ToolStripMenuItem";
+            this.編輯模式ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.編輯模式ToolStripMenuItem.Text = "編輯模式";
+            // 
+            // 開啟ToolStripMenuItem
+            // 
+            this.開啟ToolStripMenuItem.Name = "開啟ToolStripMenuItem";
+            this.開啟ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.開啟ToolStripMenuItem.Text = "開啟";
+            this.開啟ToolStripMenuItem.Click += new System.EventHandler(this.開啟ToolStripMenuItem_Click);
+            // 
+            // 關閉ToolStripMenuItem
+            // 
+            this.關閉ToolStripMenuItem.Name = "關閉ToolStripMenuItem";
+            this.關閉ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.關閉ToolStripMenuItem.Text = "關閉";
+            this.關閉ToolStripMenuItem.Click += new System.EventHandler(this.關閉ToolStripMenuItem_Click);
+            // 
+            // 說明ToolStripMenuItem
+            // 
+            this.說明ToolStripMenuItem.Name = "說明ToolStripMenuItem";
+            this.說明ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.說明ToolStripMenuItem.Text = "說明";
+            this.說明ToolStripMenuItem.Click += new System.EventHandler(this.說明ToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -245,7 +284,7 @@ namespace RandomSelector
             this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_numberDisplay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_unselectNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_unselectNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -264,8 +303,12 @@ namespace RandomSelector
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripMenuItem tool_reset;
         private System.Windows.Forms.PictureBox pictureBox_numberDisplay;
-        private System.Windows.Forms.PictureBox PictureBox_unselectNumber;
+        private System.Windows.Forms.PictureBox pictureBox_unselectNumber;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
+        private System.Windows.Forms.ToolStripMenuItem 編輯模式ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 開啟ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 關閉ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 說明ToolStripMenuItem;
     }
 }
 
