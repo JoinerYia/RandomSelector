@@ -138,13 +138,23 @@ namespace RandomSelector
 
         private void 關閉ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _pModel.SetEditMode(true);
+            _pModel.SetEditMode(false);
         }
 
         private void 說明ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             const string message = "編輯模式開啟時，點擊右側數字可以新增或移除數字。";
             MessageBox.Show(message, "說明");
+        }
+
+        private void ChangeNumberStatus(object sender, EventArgs e)
+        {
+            if(!_pModel.IsBeginSelect)
+            {
+                MessageBox.Show("請確定數字範圍", "提醒");
+                return;
+            }
+            _pModel.ChangeNumberStatus();
         }
     }
 }

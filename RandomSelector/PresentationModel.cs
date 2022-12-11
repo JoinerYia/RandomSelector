@@ -241,6 +241,17 @@ namespace RandomSelector
             UpdateForm();
         }
 
+        public void ChangeNumberStatus()
+        {
+            if (!IsEditMode || _editingNumber == null)
+                return;
+
+            string item = $"{_editingNumber / 10}{_editingNumber % 10}";
+            if (_model.Contain(item))
+                _model.RemoveItem(item);
+            else _model.AddItem(item);
+        }
+
         private void RunSelectTransition(string selectedNumber)
         {
             int tempNumber;

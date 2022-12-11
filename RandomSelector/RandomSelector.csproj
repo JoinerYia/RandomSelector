@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\Padoru.mp3" />
+    <None Include="Resources\PADORU.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
